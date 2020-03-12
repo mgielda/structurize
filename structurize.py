@@ -8,7 +8,7 @@ Enable changing paragraphs to their summary held in the original file in comment
 '''
 
 css = '''
-body { font-family: 'Roboto', sans-serif }
+body { font-family: 'Roboto', sans-serif; width: 1024px; margin: auto; overflow-y: scroll }
 body li.code { font-family: 'Overpass Mono', monospace }
 li.title { display: none }
 #main.titlesOnly li.title { display: list-item }
