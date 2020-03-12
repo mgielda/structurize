@@ -21,10 +21,8 @@ li.title:before {
     margin-right: 4px;
 }
 
-li.text:before {
-    content: "-";
-    margin-right: 4px;
-}
+li { margin-bottom: 10px }
+ul { margin-top: 10px }
 '''
 
 script = '''
