@@ -13,14 +13,44 @@ body li.code { font-family: 'Overpass Mono', monospace }
 li.title { display: none }
 #main.titlesOnly li.title { display: list-item }
 #main.titlesOnly li.text { display: none }
+
+li.text, li.title {
+    list-style: none;
+}
+
+li.title:before {
+    content: "+";
+    margin-right: 4px;
+}
+
+li.text:before {
+    content: "-";
+    margin-right: 4px;
+}
 '''
 
 script = '''
-var toggler = document.getElementById("toggleTitlesOnly");
 
-toggler.addEventListener("click", function() {
-  var main = document.getElementById("main");
-  main.classList.toggle("titlesOnly");
+$(document).ready(function() {
+  var toggler = document.getElementById("toggleTitlesOnly");
+
+  toggler.addEventListener("click", function() {
+    var main = document.getElementById("main");
+    main.classList.toggle("titlesOnly");
+  });
+  $('li').on('click', function(event) {
+    if ($(this).hasClass("text")) {
+      $(this).hide();
+      $(this).nextUntil('li.title').hide();
+      $(this).prevUntil('li.title').hide();
+      $(this).prevAll('li.title:first').show();
+    }
+    else if ($(this).hasClass("title")) {
+      $(this).hide();
+      $(this).nextUntil('li.title').show();
+    }
+    event.stopPropagation();
+  });
 });
 '''
 
@@ -83,7 +113,9 @@ if opened > closed:
         output += '</ul>'
         output += '</li>'
 
-output += f'</ul></body><script>{script}</script></html>'
+jquery = '<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>'
+
+output += f'</ul></body>{jquery}<script>{script}</script></html>'
 
 from bs4 import BeautifulSoup
 print(BeautifulSoup(output, 'html.parser').prettify())
