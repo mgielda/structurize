@@ -13,6 +13,8 @@ div#left, div#right {
     width: 50%;
 }
 
+span.count { color: #bbb }
+
 ul#main, div#content {
   padding: 0 10px;
 }

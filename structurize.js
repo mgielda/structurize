@@ -1,4 +1,11 @@
 $(document).ready(function() {
+  $('.title').each(function() {
+    wc = 0;
+    $(this).nextUntil('li.title').each(function() {
+      wc += $(this).text().split(' ').length;
+    });
+    $(this).html($(this).html()+" <span class='count'>("+wc+")</span>")
+  });
   $('li').on('click', function(event) {
     if ($(this).hasClass("text")) {
       $(this).hide();
