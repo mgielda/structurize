@@ -23,14 +23,14 @@ closed = 0
 for l in lines:
     if inside_code:
         if l[0:3] == '```':
-            output += l + '</li>'
+            output += l + '</code></li>'
             inside_code=False
         else:
-            output += l + '<br/>'
+            output += l
         continue
     if  l[0:3] == '```':
         inside_code=True
-        output += '<li class="text code">' + l + '<br/>'
+        output += '<li class="text code"><code>' + l
         continue
     if l.strip() == '':
         continue
