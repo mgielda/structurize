@@ -12,10 +12,6 @@ css = open('structurize.css').read()
 script = open('structurize.js').read()
 
 lines = open(sys.argv[1]).readlines()
-no_comments = []
-for l in lines:
-    if len(l) > 4 and l[0:4] != "<!--":
-        no_comments.append(l)
 
 inside_code = False
 output = f'<html><head><link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Roboto&display=swap" rel="stylesheet"><style>{css}</style></head><body><div id="left"><ul id="main">'
@@ -77,8 +73,8 @@ if opened > closed:
 jquery = '<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>'
 
 # currently using ver 0.8.4 of mistune, migrate to v2 when stable
-import mistune
-html = mistune.markdown('\n'.join(no_comments))
+import markdown
+html = markdown.markdown(''.join(lines))
 
 output += f'</ul></div><div id="right"><div id="content">{html}</div></div></body>{jquery}<script>{script}</script></html>'
 

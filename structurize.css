@@ -19,6 +19,7 @@ ul#main, div#content {
 
 body li.code { font-family: 'Overpass Mono', monospace }
 pre { white-space: pre-wrap }
+code { white-space: pre-wrap }
 li.text { display: none }
 
 li.text, li.title {
