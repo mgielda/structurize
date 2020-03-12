@@ -50,7 +50,7 @@ for l in lines:
             output += '</ul>'
             output += '</li>'
             closed += 1
-        output += f'<li class="header h{hlevel}">{heading}'
+        output += f'<li><span class="header h{hlevel}">{heading}</span>'
         output += '<ul>'
         opened += 1
         level = hlevel

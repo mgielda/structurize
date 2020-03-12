@@ -13,13 +13,14 @@ $(document).ready(function() {
     event.stopPropagation();
   });
   $('.header').on('click', function() {
-    if (!($(this).find('.text').is(':hidden'))) {
-      $(this).find('.text').hide();
-      $(this).find('.title').show();
+    let parent = $(this).parent();
+    if (!(parent.find('.text').is(':hidden'))) {
+      parent.find('.text').hide();
+      parent.find('.title').show();
     }
     else {
-      $(this).find('.title').hide();
-      $(this).find('.text').show();
+      parent.find('.title').hide();
+      parent.find('.text').show();
     }
   });
 });
