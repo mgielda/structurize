@@ -14,7 +14,7 @@ script = open('structurize.js').read()
 lines = open(sys.argv[1]).readlines()
 
 inside_code = False
-output = f'<html><head><link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Roboto&display=swap" rel="stylesheet"><style>{css}</style></head><body><ul id="main">'
+output = f'<html><head><link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Roboto&display=swap" rel="stylesheet"><style>{css}</style></head><body><div id="left"><ul id="main">'
 level = 0
 # number of opens and closed actually will help in h1, h3, h1 situations
 # but not fully used yet
@@ -72,7 +72,11 @@ if opened > closed:
 
 jquery = '<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>'
 
-output += f'</ul></body>{jquery}<script>{script}</script></html>'
+# currently using ver 0.8.4 of mistune, migrate to v2 when stable
+import mistune
+html = mistune.markdown('\n'.join(lines))
+
+output += f'</ul></div><div id="right">{html}</div></body>{jquery}<script>{script}</script></html>'
 
 from bs4 import BeautifulSoup
 print(BeautifulSoup(output, 'html.parser').prettify())
