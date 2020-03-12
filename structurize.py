@@ -7,52 +7,9 @@ Turn a markdown file into a collapsible content list.
 Enable changing paragraphs to their summary held in the original file in comments.
 '''
 
-css = '''
-body { font-family: 'Roboto', sans-serif; width: 1024px; margin: auto; overflow-y: scroll }
-body li.code { font-family: 'Overpass Mono', monospace }
-li.text { display: none }
+css = open('structurize.css').read()
 
-li.text, li.title {
-    list-style: none;
-}
-
-li.title:before {
-    content: "+";
-    margin-right: 4px;
-}
-
-li { margin-bottom: 10px }
-ul { margin-top: 10px }
-'''
-
-script = '''
-
-$(document).ready(function() {
-  $('li').on('click', function(event) {
-    if ($(this).hasClass("text")) {
-      $(this).hide();
-      $(this).nextUntil('li.title').hide();
-      $(this).prevUntil('li.title').hide();
-      $(this).prevAll('li.title:first').show();
-    }
-    else if ($(this).hasClass("title")) {
-      $(this).hide();
-      $(this).nextUntil('li.title').show();
-    }
-    event.stopPropagation();
-  });
-  $('.header').on('click', function() {
-    if (!($(this).find('.text').is(':hidden'))) {
-      $(this).find('.text').hide();
-      $(this).find('.title').show();
-    }
-    else {
-      $(this).find('.title').hide();
-      $(this).find('.text').show();
-    }
-  });
-});
-'''
+script = open('structurize.js').read()
 
 lines = open(sys.argv[1]).readlines()
 
