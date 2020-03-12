@@ -10,9 +10,7 @@ Enable changing paragraphs to their summary held in the original file in comment
 css = '''
 body { font-family: 'Roboto', sans-serif; width: 1024px; margin: auto; overflow-y: scroll }
 body li.code { font-family: 'Overpass Mono', monospace }
-li.title { display: none }
-#main.titlesOnly li.title { display: list-item }
-#main.titlesOnly li.text { display: none }
+li.text { display: none }
 
 li.text, li.title {
     list-style: none;
@@ -32,12 +30,6 @@ li.text:before {
 script = '''
 
 $(document).ready(function() {
-  var toggler = document.getElementById("toggleTitlesOnly");
-
-  toggler.addEventListener("click", function() {
-    var main = document.getElementById("main");
-    main.classList.toggle("titlesOnly");
-  });
   $('li').on('click', function(event) {
     if ($(this).hasClass("text")) {
       $(this).hide();
@@ -51,13 +43,23 @@ $(document).ready(function() {
     }
     event.stopPropagation();
   });
+  $('.header').on('click', function() {
+    if (!($(this).find('.text').is(':hidden'))) {
+      $(this).find('.text').hide();
+      $(this).find('.title').show();
+    }
+    else {
+      $(this).find('.title').hide();
+      $(this).find('.text').show();
+    }
+  });
 });
 '''
 
 lines = open(sys.argv[1]).readlines()
 
 inside_code = False
-output = f'<html><head><link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Roboto&display=swap" rel="stylesheet"><style>{css}</style></head><body><button id="toggleTitlesOnly">Toggle titles</button><ul id="main">'
+output = f'<html><head><link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Roboto&display=swap" rel="stylesheet"><style>{css}</style></head><body><ul id="main">'
 level = 0
 # number of opens and closed actually will help in h1, h3, h1 situations
 # but not fully used yet
@@ -93,7 +95,7 @@ for l in lines:
             output += '</ul>'
             output += '</li>'
             closed += 1
-        output += f'<li>{heading}'
+        output += f'<li class="header h{hlevel}">{heading}'
         output += '<ul>'
         opened += 1
         level = hlevel
