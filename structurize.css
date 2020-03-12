@@ -1,5 +1,24 @@
-body { font-family: 'Roboto', sans-serif; width: 1024px; margin: auto; overflow-y: scroll }
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-y: visible;
+    height: 100%;
+}
+
+div#left, div#right {
+    display: inline-block;
+    overflow-y: scroll;
+    height: 100%;
+    width: 50%;
+}
+
+ul#main, div#content {
+  padding: 0 10px;
+}
+
 body li.code { font-family: 'Overpass Mono', monospace }
+pre { white-space: pre-wrap }
 li.text { display: none }
 
 li.text, li.title {

@@ -65,7 +65,7 @@ if opened < closed:
 
 if opened > closed:
     diff = opened - closed
-    print(f"Closed {diff} unclosed uls.")
+    # print(f"Closed {diff} unclosed uls.")
     for i in range(0, diff):
         output += '</ul>'
         output += '</li>'
@@ -76,8 +76,8 @@ jquery = '<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="s
 import mistune
 html = mistune.markdown('\n'.join(lines))
 
-output += f'</ul></div><div id="right">{html}</div></body>{jquery}<script>{script}</script></html>'
+output += f'</ul></div><div id="right"><div id="content">{html}</div></div></body>{jquery}<script>{script}</script></html>'
 
-from bs4 import BeautifulSoup
-print(BeautifulSoup(output, 'html.parser').prettify())
-
+# from bs4 import BeautifulSoup
+# print(BeautifulSoup(output, 'html.parser').prettify())
+print(output)
